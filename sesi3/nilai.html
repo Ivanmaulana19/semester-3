@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Nilai Siswa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Mengatur dasar halaman */
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            /* Latar belakang dengan gradien radial */
+            background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+        }
+        /* Kontainer utama dengan efek Glassmorphism */
+        
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            /* Semi-transparan */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            /* Efek blur */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+            /* Animasi saat muncul */
+            animation: fadeIn 1s ease-out;
+        }
+        /* Judul utama */
+        
+        h2 {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        /* Tabel utama */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #333;
+        }
+        /* Header dan sel tabel */
+        
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+        }
+        /* Header tabel (thead) */
+        
+        thead tr {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #1a1a2e;
+        }
+        
+        thead th:first-child {
+            border-top-left-radius: 10px;
+        }
+        
+        thead th:last-child {
+            border-top-right-radius: 10px;
+        }
+        /* Badan tabel (tbody) */
+        
+        tbody tr {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+        
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+        /* Efek hover pada baris tabel */
+        
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.02);
+            /* Sedikit membesar */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        /* Keyframes untuk animasi fade-in */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Dashboard Nilai Siswa</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>NAMA SISWA</th>
+                    <th>TUGAS</th>
+                    <th>UTS</th>
+                    <th>UAS</th>
+                    <th>NILAI AKHIR</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-body">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Data awal siswa (tidak ada perubahan di sini)
+        const namaSiswa = ["Asep", "Iwan", "Cepi", "Agus", "Dadang"];
+        const nilaiTugas = [80, 75, 70, 65, 60];
+        const nilaiUts = [95, 75, 80, 40, 70];
+        const nilaiUas = [85, 90, 90, 55, 60];
+
+        const tabelBody = document.getElementById("tabel-body");
+
+        for (let i = 0; i < namaSiswa.length; i++) {
+            let tugas = nilaiTugas[i];
+            let uts = nilaiUts[i];
+            let uas = nilaiUas[i];
+            let nilaiAkhir = (0.40 * tugas) + (0.30 * uts) + (0.30 * uas);
+
+            let baris = `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><b>${namaSiswa[i]}</b></td>
+                    <td>${tugas}</td>
+                    <td>${uts}</td>
+                    <td>${uas}</td>
+                    <td><b>${nilaiAkhir.toFixed(1)}</b></td>
+                </tr>
+            `;
+            // Menambahkan baris ke tabel dengan innerHTML
+            tabelBody.innerHTML += baris;
+        }
+    </script>
+
+</body>
+
+</html>
